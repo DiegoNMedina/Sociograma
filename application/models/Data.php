@@ -18,7 +18,7 @@
 
         /** RETURN STUDENTS */
         function queryStudents($param) {
-            $query = "SELECT * FROM alumnos WHERE grupo = '$param'";
+            $query = "SELECT * FROM alumnos WHERE grupo = '$param' ORDER BY nombre ASC";
             $result = $this->db->query(($query));
             return $result->result_array();
         }
@@ -31,7 +31,7 @@
 
         /** REPORTS  */
         
-        public function reportTeacher($asd) {
+        public function reportTeacher() {
             $query = "SELECT alumnos.nombre, preguntas.pregunta, preguntas.tipo, puntos FROM resultados_a 
             INNER JOIN alumnos ON resultados_a.id = alumnos.id 
             INNER JOIN preguntas ON resultados_a.pregunta = preguntas.id 
@@ -46,6 +46,18 @@
             INNER JOIN preguntas ON resultados_a.pregunta = preguntas.id
             WHERE resultados_a.pregunta = $where 
             ORDER BY alumnos.nombre ASC";
+            $result = $this->db->query($query); 
+            return  json_encode($result->result_array());
+        }
+
+        public function returnStudentsByGroup($question, $group) {
+            $query = "SELECT alumnos.nombre, preguntas.pregunta, puntos 
+            FROM resultados_a 
+            INNER JOIN alumnos ON resultados_a.alumno = alumnos.id 
+            INNER JOIN preguntas ON resultados_a.pregunta = preguntas.id
+            WHERE resultados_a.pregunta = $question AND
+            alumnos.grupo = '$group'
+            ORDER BY puntos DESC";
             $result = $this->db->query($query); 
             return  json_encode($result->result_array());
         }
