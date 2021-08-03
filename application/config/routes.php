@@ -9,7 +9,7 @@ $route['404_override'] = 'notfound/index';
 //$route['novenoA'] = 'sociograma/novenoA';
 //$route['novenoB'] = 'sociograma/novenoB';
 //$route['novenoC'] = 'sociograma/novenoC';
-$route['novenoD'] = 'sociograma/novenoD';
+//$route['novenoD'] = 'sociograma/novenoD';
 
 
 /* TEACHER REPORTS */
